@@ -12,6 +12,7 @@ namespace RenderComponent
 {
     RenderManager::RenderManager(RenderComponent::IRenderable *components, DisplayInformation information)
     {
+        Serial.println("Render was created");
         this->currentComponenets = components;
         this->currentDisplay = Adafruit_SSD1306(Information.width, Information.height, &Wire, RESET_PIN);
         this->Information = information;
@@ -23,6 +24,7 @@ namespace RenderComponent
     //soon as possible
     bool RenderManager::StartRender()
     {
+        Serial.println("Render had already begun");
         long currentMillis = millis();
         long difference = currentMillis - lastRefresh;
 
@@ -39,7 +41,7 @@ namespace RenderComponent
 
     void RenderManager::RenderComponents(RenderComponent::IRenderable *components)
     {
-        int componentsLength = sizeof(components) / sizeof(IRenderable);
+        //int componentsLength = sizeof(components) / sizeof(IRenderable);
         for (int i = 0; i < 1; i++)
         {
             auto& currentComponent = components[i];

@@ -6,10 +6,12 @@
 #include "Components\ButtonComponent.h"
 #include "RenderComponent\RenderManager.h"
 #include "Snake.h"
+#include "List.h"
 
 #define ONE_INTERATION 500
 
 
+src::Snake *snake;
 RenderComponent::IRenderable *renderComponents[1];
 RenderComponent::RenderManager *renderManager;
 
@@ -27,8 +29,10 @@ void setup()
 
     pinMode(13, OUTPUT);
 
-    renderComponents[0] = new src::Snake();
-    currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 9);
+    snake = new src::Snake();
+
+    renderComponents[0] = snake;
+    currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 11);
 
     displayInformation.width = 128;
     displayInformation.height = 64;
@@ -44,6 +48,8 @@ void setup()
 
 void loop()
 { 
+    (*snake).Position.X -= 1;
+
     (*renderManager).StartRender();
     long difference = millis() - lastMilliseconds;
 
