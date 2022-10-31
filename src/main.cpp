@@ -28,7 +28,7 @@ void setup()
     pinMode(13, OUTPUT);
 
     renderComponents[0] = new src::Snake();
-    currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 7);
+    currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 9);
 
     displayInformation.width = 128;
     displayInformation.height = 64;
