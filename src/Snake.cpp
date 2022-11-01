@@ -5,24 +5,28 @@ namespace src
 {
     Snake::Snake()
     {
-        TilePositions = new Vector2[3];
-        Serial.println("Snake created");
+        TilePositions = new Vector2[6];
+        //Serial.println("Snake created");
     }
 
     void Snake::OnRender(Adafruit_SSD1306 display)
     {
-        TilePositions[0] = Position;
+        Position.X -= 1;
+        int length = sizeof(&TilePositions);
+        Serial.println(length);
 
-        int length = sizeof(TilePositions) / sizeof(Vector2);
-
-        for (int i = 2; i > 1; i--)
+        for (int i = 5; i > 0; i--)
         {
-            Serial.println(length);
             auto nextPosition = TilePositions[i - 1];
             TilePositions[i] = nextPosition;
 
             auto currentPosition = TilePositions[i];
             display.writePixel(currentPosition.X, currentPosition.Y, SSD1306_WHITE);
         }
+
+        TilePositions[0] = Position;
+
+        //Serial.println(TilePositions[0].X);
+        display.writePixel(TilePositions[0].X, TilePositions[0].Y, SSD1306_WHITE);
     }
 }

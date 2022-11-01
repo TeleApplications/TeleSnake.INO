@@ -11,7 +11,6 @@
 #define ONE_INTERATION 500
 
 
-src::Snake *snake;
 RenderComponent::IRenderable *renderComponents[1];
 RenderComponent::RenderManager *renderManager;
 
@@ -25,13 +24,16 @@ void getTestButtonAction(bool state);
 void setup()
 {
     Serial.begin(9600);
-    Serial.print("Setup is already done");
+    //Serial.print("Setup is already done");
 
     pinMode(13, OUTPUT);
 
-    snake = new src::Snake();
 
-    renderComponents[0] = snake;
+    auto currentSnake = new src::Snake();
+    currentSnake->Position.X = 50;
+    currentSnake->Position.Y = 50;
+
+    renderComponents[0] = currentSnake;
     currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 11);
 
     displayInformation.width = 128;
@@ -48,8 +50,6 @@ void setup()
 
 void loop()
 { 
-    (*snake).Position.X -= 1;
-
     (*renderManager).StartRender();
     long difference = millis() - lastMilliseconds;
 
@@ -67,8 +67,8 @@ void getTestButtonAction(bool state)
 {
     if(state)
     {
-        Serial.println("Pressed");
-        digitalWrite(13, HIGH);
+        //Serial.println("Pressed");
+        //digitalWrite(13, HIGH);
     }
     else
         digitalWrite(13, LOW);

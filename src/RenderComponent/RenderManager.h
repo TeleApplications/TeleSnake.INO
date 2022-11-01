@@ -25,9 +25,9 @@ namespace RenderComponent
         public: DisplayInformation Information;
 
     
-        public: RenderManager(RenderComponent::IRenderable *components, DisplayInformation information);
+        public: RenderManager(RenderComponent::IRenderable components[], DisplayInformation information);
 
         public: bool StartRender();
-        private: void RenderComponents(RenderComponent::IRenderable *components);
+        private: void RenderComponents(RenderComponent::IRenderable components[]);
     };
 }
