@@ -20,7 +20,7 @@ namespace Components
     void ButtonComponent::OnUpdate(long difference)
     {
         long currentDifference = difference - lastDebounce;
-        if(difference > BUTTON_DELAY)
+        if(currentDifference > BUTTON_DELAY)
         {
             auto currentState = IsPressed();
             if(currentState != lastButtonState)
