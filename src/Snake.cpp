@@ -5,8 +5,7 @@ namespace src
 {
     Snake::Snake()
     {
-        TilePositions = new Vector2[18];
-        //Serial.println("Snake created");
+        TilePositions = new Vector2[4];
     }
 
     void Snake::OnRender(Adafruit_SSD1306 display)
@@ -15,6 +14,7 @@ namespace src
 
         int pointerLength = *(&TilePositions + 1);
         int length = pointerLength / sizeof(*TilePositions);
+        Serial.println(length);
 
         for (int i = length - 1; i > 0; i--)
         {
