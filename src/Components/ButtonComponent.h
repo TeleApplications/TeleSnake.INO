@@ -3,10 +3,11 @@
 
 namespace Components
 {
-    typedef void (*ButtonAction) (bool state);
 
     class ButtonComponent : public Component
     {
+        typedef void (*ButtonAction) (bool state, ButtonComponent* component);
+
         private: long lastDebounce = 0;
         private: bool lastButtonState = 0;
         private: ButtonAction action;
@@ -19,4 +20,5 @@ namespace Components
 
         public: bool IsPressed();
     };
+
 }

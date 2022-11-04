@@ -5,13 +5,16 @@ namespace src
 {
     Snake::Snake()
     {
-        TilePositions = new Vector2[4];
+        TilePositions = new Vector2[14];
+        Direction = src::Vector2::Right();
     }
 
     void Snake::OnRender(Adafruit_SSD1306 display)
     {
-        Position.X -= 1;
+        Position.X += Direction.X;
+        Position.Y += Direction.Y;
 
+        Serial.println(Direction.X);
         int pointerLength = *(&TilePositions + 1);
         int length = pointerLength / sizeof(*TilePositions);
         Serial.println(length);
