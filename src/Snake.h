@@ -26,6 +26,13 @@ namespace src
 
             return new Vector2(finalX, finalY);
         }
+        public: Vector2* operator-=(const src::Vector2 vector)
+        {
+            int finalX = X - vector.X;
+            int finalY = Y - vector.Y;
+
+            return new Vector2(finalX, finalY);
+        }
 
         public: static Vector2 Left() { return Vector2(-1, 0); }
         public: static Vector2 Right() { return Vector2(1, 0); }
@@ -43,6 +50,8 @@ namespace src
         public: Vector2 *TilePositions;
 
         public: Snake();
+
         public: void OnRender(Adafruit_SSD1306 display) override;
+        private: void DrawTile(Adafruit_SSD1306 display, Vector2 position, int size, Vector2 offset);
     };
 }
