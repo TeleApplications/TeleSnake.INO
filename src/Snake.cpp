@@ -5,8 +5,8 @@ namespace src
 {
     Snake::Snake()
     {
-        TilePositions = new Vector2[12];
-        Direction = src::Vector2::Right();
+        TilePositions = new src::Vector2D[32];
+        Direction = src::Vector2D::Right();
     }
 
     void Snake::OnRender(Adafruit_SSD1306 display)
@@ -14,43 +14,34 @@ namespace src
         Position.X += Direction.X;
         Position.Y += Direction.Y;
 
-        int length = 12;
-        //Serial.write("Render");
-        for (int i = length - 1; i > 0; i--)
+        Serial.print(TileLength);
+        for (int i = TileLength - 1; i > 0; i--)
         {
             auto currentPosition = TilePositions[i - 1];
-
             auto oldPosition = TilePositions[i];
             TilePositions[i] = currentPosition;
 
-            //oldPosition -= currentPosition;
-            int indexX = CalculateIndex(currentPosition.X - oldPosition.X);
-            Serial.print(indexX);
-            int indexY = CalculateIndex(currentPosition.Y - oldPosition.Y);
-            DrawTile(display, currentPosition, 1, src::Vector2(Direction.X * i , 0));
+            DrawTile(display, currentPosition, 2, Vector2D(0, 0));
+        }
 
-            //display.writePixel(currentPosition.X, currentPosition.Y, SSD1306_WHITE);
+        if(Position.X == foodComponent.Position.X && Position.Y == foodComponent.Position.Y)
+        {
+            auto newPosition = new Vector2D(RandomNext(0, 128), RandomNext(0, 64));
+            TileLength++;
         }
 
         TilePositions[0] = Position;
-        //DrawTile(display, TilePositions[0], 4, src::Vector2(1, 1)); 
+        DrawTile(display, TilePositions[0], 4, Vector2D(0, 0));
+        foodComponent.OnRender(display);
     }
 
-    int Snake::CalculateIndex(int value)
+    int Snake::RandomNext(int min, int max)
     {
-        //Serial.write(value);
-        //int devideIndex = 1 >> (value & (value / 2));
-        //Serial.write(returnValue);
-
-        if(value == 0)
-            return value;
-
-        int absValue = value > 0 ? value : value * -1;
-        int returnValue = absValue / value;
-        return returnValue;
+        int maxValue = (max - min + 1);
+        return min + (rand() % maxValue);
     }
 
-    void Snake::DrawTile(Adafruit_SSD1306 display, Vector2 position, int size, Vector2 offset)
+    void Snake::DrawTile(Adafruit_SSD1306 display, Vector2D position, int size, Vector2D offset)
     {
         for (int i = 0; i < size; i++)
         {

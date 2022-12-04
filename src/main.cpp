@@ -6,17 +6,18 @@
 #include "Components\ButtonComponent.h"
 #include "RenderComponent\RenderManager.h"
 #include "Snake.h"
-#include "List.h"
+#include "Vector2.cpp"
+#include "Food.h"
 
 #define ONE_INTERATION 500
+long lastMilliseconds;
 
 
 RenderComponent::IRenderable *renderComponents[1];
 RenderComponent::RenderManager *renderManager;
 
-long lastMilliseconds;
-
 RenderComponent::DisplayInformation displayInformation;
+
 Components::Component *currentComponents[4];
 src::Snake *currentSnake;
 
@@ -74,28 +75,28 @@ void getTestButtonAction(bool state, Components::ButtonComponent* component)
     if(component->Pin == 4 && state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2::Left();
+        currentSnake->Direction = src::Vector2D::Left();
         Serial.println("Left");
     }
 
     if(component->Pin == 2 && !state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2::Down();
+        currentSnake->Direction = src::Vector2D::Down();
         Serial.println("Down");
     }
 
     if(component->Pin == 7 && !state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2::Up();
+        currentSnake->Direction = src::Vector2D::Up();
         Serial.println("Up");
     }
 
     if(component->Pin == 8 && state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2::Right();
+        currentSnake->Direction = src::Vector2D::Right();
         Serial.println("Right");
     }
 }
