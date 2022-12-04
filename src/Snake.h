@@ -52,6 +52,8 @@ namespace src
         public: Snake();
 
         public: void OnRender(Adafruit_SSD1306 display) override;
+
         private: void DrawTile(Adafruit_SSD1306 display, Vector2 position, int size, Vector2 offset);
+        private: int CalculateIndex(int value);
     };
 }
