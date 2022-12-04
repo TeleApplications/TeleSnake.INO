@@ -1,39 +1,30 @@
+#include "Vector2.h"
+
 namespace src
 {
-    class Vector2D
+    Vector2::Vector2() 
     {
-        public: int X = 0;
-        public: int Y = 0;
+    }
 
-        public: Vector2D()
-        {
-        };
+    Vector2::Vector2(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
 
-        public: Vector2D(int x, int y)
-        {
-            X = x;
-            Y = y;
-        };
+    Vector2* Vector2::operator+=(const src::Vector2 vector)
+    {
+        int finalX = X + vector.X;
+        int finalY = Y + vector.Y;
 
-        public: Vector2D* operator+=(const src::Vector2D vector)
-        {
-            int finalX = X + vector.X;
-            int finalY = Y + vector.Y;
+        return new Vector2(finalX, finalY);
+    }
 
-            return new Vector2D(finalX, finalY);
-        }
+    Vector2* Vector2::operator-=(const src::Vector2 vector)
+    {
+        int finalX = X - vector.X;
+        int finalY = Y - vector.Y;
 
-        public: Vector2D* operator-=(const src::Vector2D vector)
-        {
-            int finalX = X - vector.X;
-            int finalY = Y - vector.Y;
-
-            return new Vector2D(finalX, finalY);
-        }
-
-        public: static Vector2D Left() { return Vector2D(-1, 0); }
-        public: static Vector2D Right() { return Vector2D(1, 0); }
-        public: static Vector2D Up() { return Vector2D(0, 1); }
-        public: static Vector2D Down() { return Vector2D(0, -1); }
-    };
+        return new Vector2(finalX, finalY);
+    }
 }

@@ -1,5 +1,5 @@
 #include "RenderComponent\IRenderable.h"
-#include "Vector2.cpp"
+#include "Vector2.h"
 #pragma once
 
 namespace src 
@@ -7,7 +7,7 @@ namespace src
     class Food : public RenderComponent::IRenderable 
     {
         private: char foodCharacter = '#';
-        public: src::Vector2D Position;
+        public: src::Vector2 Position;
 
         public: Food();
 

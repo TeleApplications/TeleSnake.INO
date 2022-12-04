@@ -5,8 +5,8 @@ namespace src
 {
     Snake::Snake()
     {
-        TilePositions = new src::Vector2D[32];
-        Direction = src::Vector2D::Right();
+        TilePositions = new Vector2[32];
+        Direction = Vector2::Right();
     }
 
     void Snake::OnRender(Adafruit_SSD1306 display)
@@ -21,17 +21,17 @@ namespace src
             auto oldPosition = TilePositions[i];
             TilePositions[i] = currentPosition;
 
-            DrawTile(display, currentPosition, 2, Vector2D(0, 0));
+            DrawTile(display, currentPosition, 2, Vector2(0, 0));
         }
 
         if(Position.X == foodComponent.Position.X && Position.Y == foodComponent.Position.Y)
         {
-            auto newPosition = new Vector2D(RandomNext(0, 128), RandomNext(0, 64));
+            auto newPosition = new Vector2(RandomNext(0, 128), RandomNext(0, 64));
             TileLength++;
         }
 
         TilePositions[0] = Position;
-        DrawTile(display, TilePositions[0], 4, Vector2D(0, 0));
+        DrawTile(display, TilePositions[0], 4, Vector2(0, 0));
         foodComponent.OnRender(display);
     }
 
@@ -41,7 +41,7 @@ namespace src
         return min + (rand() % maxValue);
     }
 
-    void Snake::DrawTile(Adafruit_SSD1306 display, Vector2D position, int size, Vector2D offset)
+    void Snake::DrawTile(Adafruit_SSD1306 display, Vector2 position, int size, Vector2 offset)
     {
         for (int i = 0; i < size; i++)
         {

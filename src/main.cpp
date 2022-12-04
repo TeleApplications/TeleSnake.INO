@@ -6,7 +6,7 @@
 #include "Components\ButtonComponent.h"
 #include "RenderComponent\RenderManager.h"
 #include "Snake.h"
-#include "Vector2.cpp"
+#include "Vector2.h"
 #include "Food.h"
 
 #define ONE_INTERATION 500
@@ -75,28 +75,28 @@ void getTestButtonAction(bool state, Components::ButtonComponent* component)
     if(component->Pin == 4 && state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2D::Left();
+        currentSnake->Direction = src::Vector2::Left();
         Serial.println("Left");
     }
 
     if(component->Pin == 2 && !state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2D::Down();
+        currentSnake->Direction = src::Vector2::Down();
         Serial.println("Down");
     }
 
     if(component->Pin == 7 && !state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2D::Up();
+        currentSnake->Direction = src::Vector2::Up();
         Serial.println("Up");
     }
 
     if(component->Pin == 8 && state)
     {
         digitalWrite(13, HIGH);
-        currentSnake->Direction = src::Vector2D::Right();
+        currentSnake->Direction = src::Vector2::Right();
         Serial.println("Right");
     }
 }
