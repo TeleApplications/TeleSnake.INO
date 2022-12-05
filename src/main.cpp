@@ -5,9 +5,9 @@
 #include <Adafruit_GFX.h>
 #include "Components\ButtonComponent.h"
 #include "RenderComponent\RenderManager.h"
-#include "Snake.h"
+#include "RenderComponent\Components\Snake\Snake.h"
+#include "RenderComponent\Components\Food\Food.h"
 #include "Vector2.h"
-#include "Food.h"
 
 #define ONE_INTERATION 500
 long lastMilliseconds;
