@@ -11,9 +11,18 @@ namespace RenderComponent
 {
     struct DisplayInformation
     {
-        int width;
-        int height;
-        int address;
+        public:
+            int Width;
+            int Height;
+            int Address;
+
+        public: DisplayInformation() { }
+        public: DisplayInformation(int width, int height, int address)
+        {
+            Width = width;
+            Height = height;
+            Address = address;
+        }
     };
 
     class RenderManager

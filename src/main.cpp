@@ -16,10 +16,10 @@ long lastMilliseconds;
 RenderComponent::IRenderable *renderComponents[1];
 RenderComponent::RenderManager *renderManager;
 
-RenderComponent::DisplayInformation displayInformation;
+RenderComponent::DisplayInformation displayInformation = RenderComponent::DisplayInformation(128, 64, 0x3C);
 
 Components::Component *currentComponents[4];
-src::Snake *currentSnake;
+src::Snake *currentSnake = new src::Snake();
 
 void getTestButtonAction(bool state, Components::ButtonComponent* component);
 
@@ -28,23 +28,14 @@ void setup()
     Serial.begin(9600);
     pinMode(13, OUTPUT);
 
-    currentSnake = new src::Snake();
     currentSnake->Position.X = 50;
     currentSnake->Position.Y = 50;
     renderComponents[0] = currentSnake;
 
-    currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 4);
-    currentComponents[2] = new Components::ButtonComponent(getTestButtonAction, 8);
-
+    currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 3);
     currentComponents[1] = new Components::ButtonComponent(getTestButtonAction, 2);
-    currentComponents[1]->Mode = INPUT;
-
-    currentComponents[3] = new Components::ButtonComponent(getTestButtonAction, 7);
-    currentComponents[3]->Mode = INPUT;
-
-    displayInformation.width = 128;
-    displayInformation.height = 64;
-    displayInformation.address = 0x3C;
+    currentComponents[2] = new Components::ButtonComponent(getTestButtonAction, 6);
+    currentComponents[3] = new Components::ButtonComponent(getTestButtonAction, 5);
 
     renderManager = new RenderComponent::RenderManager(*renderComponents, displayInformation);
     for(int i = 0; i < 4; i++)
@@ -72,21 +63,21 @@ void loop()
 
 void getTestButtonAction(bool state, Components::ButtonComponent* component)
 {
-    if(component->Pin == 4 && state)
+    if(component->Pin == 3 && state)
     {
         digitalWrite(13, HIGH);
         currentSnake->Direction = src::Vector2::Left();
         Serial.println("Left");
     }
 
-    if(component->Pin == 2 && !state)
+    if(component->Pin == 6 && !state)
     {
         digitalWrite(13, HIGH);
         currentSnake->Direction = src::Vector2::Down();
         Serial.println("Down");
     }
 
-    if(component->Pin == 7 && !state)
+    if(component->Pin == 5 && !state)
     {
         digitalWrite(13, HIGH);
         currentSnake->Direction = src::Vector2::Up();

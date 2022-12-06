@@ -14,25 +14,26 @@ namespace src
         Position.X += Direction.X;
         Position.Y += Direction.Y;
 
-        Serial.print(TileLength);
+        //Serial.print(TileLength);
         for (int i = TileLength - 1; i > 0; i--)
         {
             auto currentPosition = TilePositions[i - 1];
-            auto oldPosition = TilePositions[i];
             TilePositions[i] = currentPosition;
+            Serial.println("X: " + currentPosition.X);
+            Serial.println("Y: " + currentPosition.Y);
 
             DrawTile(display, currentPosition, 2, Vector2(0, 0));
         }
+        //if(Position.X == FoodPosition.X && Position.Y == FoodPosition.Y)
+        //{
+            //FoodPosition = Vector2(RandomNext(0, 128), RandomNext(0, 64));
+            //TileLength++;
+        //}
 
-        if(Position.X == foodComponent.Position.X && Position.Y == foodComponent.Position.Y)
-        {
-            auto newPosition = new Vector2(RandomNext(0, 128), RandomNext(0, 64));
-            TileLength++;
-        }
 
         TilePositions[0] = Position;
-        DrawTile(display, TilePositions[0], 4, Vector2(0, 0));
-        foodComponent.OnRender(display);
+        //display.drawChar(TilePositions[0].X, TilePositions[0].Y, 'O', SSD1306_BLACK, SSD1306_WHITE, 1);
+        //display.drawChar(FoodPosition.X, FoodPosition.Y, '.', SSD1306_WHITE, SSD1306_WHITE, 1);
     }
 
     int Snake::RandomNext(int min, int max)

@@ -6,17 +6,17 @@
 #include "RenderManager.h"
 
 #define RESET_PIN -1
-#define ONE_FRAME 450 
+#define ONE_FRAME 350 
 
 namespace RenderComponent
 {
     RenderManager::RenderManager(RenderComponent::IRenderable components[], DisplayInformation information)
     {
         this->currentComponenets = components;
-        this->currentDisplay = Adafruit_SSD1306(Information.width, Information.height, &Wire, RESET_PIN);
+        this->currentDisplay = Adafruit_SSD1306(Information.Width, Information.Height, &Wire, RESET_PIN);
         this->Information = information;
 
-        currentDisplay.begin(SSD1306_SWITCHCAPVCC, Information.address);
+        currentDisplay.begin(SSD1306_SWITCHCAPVCC, Information.Address);
     }
 
     //The returned value is will be changed as
@@ -25,7 +25,7 @@ namespace RenderComponent
     {
         long currentMillis = millis();
         long difference = currentMillis - lastRefresh;
-
+ 
         if(difference >= (ONE_FRAME))
         {
             lastRefresh = currentMillis;

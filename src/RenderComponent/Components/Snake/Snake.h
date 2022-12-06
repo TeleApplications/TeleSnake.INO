@@ -8,13 +8,11 @@ namespace src
 {
     class Snake : public RenderComponent::IRenderable
     {
-        private: src::Food foodComponent = src::Food();
         public: int TileLength = 8;
 
         public: Vector2 Position;
         public: Vector2 Direction;
 
-        private: Vector2 lastDirection;
         public: Vector2 *TilePositions;
 
         public: Snake();
