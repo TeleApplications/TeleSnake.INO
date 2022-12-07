@@ -33,9 +33,9 @@ void setup()
     renderComponents[0] = currentSnake;
 
     currentComponents[0] = new Components::ButtonComponent(getTestButtonAction, 3);
-    currentComponents[1] = new Components::ButtonComponent(getTestButtonAction, 2);
+    currentComponents[1] = new Components::ButtonComponent(getTestButtonAction, 4);
     currentComponents[2] = new Components::ButtonComponent(getTestButtonAction, 6);
-    currentComponents[3] = new Components::ButtonComponent(getTestButtonAction, 5);
+    currentComponents[3] = new Components::ButtonComponent(getTestButtonAction, 8);
 
     renderManager = new RenderComponent::RenderManager(*renderComponents, displayInformation);
     for(int i = 0; i < 4; i++)
@@ -77,7 +77,7 @@ void getTestButtonAction(bool state, Components::ButtonComponent* component)
         Serial.println("Down");
     }
 
-    if(component->Pin == 5 && !state)
+    if(component->Pin == 4 && !state)
     {
         digitalWrite(13, HIGH);
         currentSnake->Direction = src::Vector2::Up();
